@@ -1,0 +1,24 @@
+<div class="show-info">
+  <div class="show-image">
+    <%= image_tag("https://image.tmdb.org/t/p//w300_and_h450_bestv2/#{@show["poster_path"]}") %>
+  </div>
+  <div class="show-info-data">
+    <h3><%= @show["name"]%></h3>
+    <hr/>
+    <h5>Overview</h5>
+    <p><%= @show["overview"] %></p>
+    <p><strong>First Aired: </strong><%= @show["first_air_date"] %></p>
+    <p><strong>Genre: </strong>
+      <% @show["genres"].each_with_index do |genre, index| %>
+        <% if index != @show["genres"].length - 1 %>
+          <%= genre["name"] %>,
+        <% else %>
+          <%= genre["name"] %>
+        <% end %>
+      <% end %>
+    </p>
+    <p><strong>Number of Seasons: </strong><%= @show["seasons"].count %></p>
+    <hr>
+    <%= link_to("Back to search", root_path(), class: "btn") %>
+  </div>
+</div>

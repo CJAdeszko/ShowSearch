@@ -1,0 +1,33 @@
+<!--SEARCH BAR-->
+<div id="search_bar">
+  <div class="row fixed">
+    <form class="col s12" action="/movies" method="get">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input id="icon_prefix2" class="materialize-textarea" name="search" placeholder="Search for a movie..."></input>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="movie-collection">
+  <% @movies.each do |movie| %>
+      <div class="card hoverable">
+        <div class="card-image">
+          <% if !movie["poster_path"].nil? %>
+            <%= image_tag("https://image.tmdb.org/t/p//w300_and_h450_bestv2/#{movie["poster_path"]}") %>
+          <% else %>
+          <div class="missing-image valign-wrapper">
+            <i class="material-icons large grey lighten-2 white-text missing-image-icon">sentiment_very_dissatisfied</i>
+          </div>
+          <% end %>
+        </div>
+        <h5 class="card-title center-align"><%= movie["title"] %></h5>
+        <div class="card-content center-align card-btn">
+          <%= link_to("Movie Details", movies_show_path(:movie_id => movie["id"]), class: "btn" ) %>
+        </div>
+      </div>
+  <% end %>
+</div>

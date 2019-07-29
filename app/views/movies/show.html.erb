@@ -1,0 +1,25 @@
+<div class="movie-info">
+  <div class="movie-image">
+    <%= image_tag("https://image.tmdb.org/t/p//w300_and_h450_bestv2/#{@movie["poster_path"]}") %>
+  </div>
+  <div class="movie-info-data">
+    <h3><%= @movie["title"]%></h3>
+    <hr/>
+    <h5>Overview</h5>
+    <p><%= @movie["overview"] %></p>
+    <p><strong>Release Date: </strong><%= @movie["release_date"] %></p>
+    <p><strong>Genre: </strong>
+      <% @movie["genres"].each_with_index do |genre, index| %>
+        <% if index != @movie["genres"].length - 1 %>
+          <%= genre["name"] %>,
+        <% else %>
+          <%= genre["name"] %>
+        <% end %>
+      <% end %>
+    </p>
+    <p><strong> </strong><%= %></p>
+    <hr>
+    <%= link_to("View on IMDB", "http://imdb.com/title/#{@movie["imdb_id"]}", target: "_blank", class: "btn") %>
+    <%= link_to("Back to search", movies_path(), class: "btn") %>
+  </div>
+</div>

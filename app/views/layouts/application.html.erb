@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShowSearch</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css', media: 'all' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'load' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'load' %>
+  </head>
+
+  <body>
+    <!-- DESKTOP NAVBAR -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper indigo darken-4">
+          <a href='/' class='brand-logo left'><i class='material-icons'>search</i>ShowSearch</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><%= link_to 'TV Shows', root_path, :class => 'navbar-link' %></li>
+            <li><%= link_to 'Movies', movies_path, :class => 'navbar-link' %></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- MOBILE NAVBAR -->
+    <ul class="sidenav" id="mobile-demo">
+      <li><%= link_to "TV Shows", root_path %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Movies", movies_path%></li>
+      <li class="divider"></li>
+    </ul>
+
+    <div class="container" id="main-container">
+      <%= yield %>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer indigo darken-4">
+      <span class="left-align">© 2019 CJAdeszko</span>
+    </footer>
+
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js' %>
+  </body>
+</html>
