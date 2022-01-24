@@ -13,9 +13,37 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery
 
 //MOBILE NAV INIT
 document.addEventListener('turbolinks:load', function() {
   var elems = document.querySelectorAll('.sidenav');
   var instances = M.Sidenav.init(elems);
 });
+
+
+$(document).ready(() => {
+  $('#more-shows-btn').on('click', (e) => {
+    getMoreShows();
+    e.preventDefault();
+  });
+});
+
+var pageNum = 2;
+
+function getMoreShows(){
+  $.ajax({
+    url: 'https://api.themoviedb.org/3/discover/tv?api_key=<%= Rails.application.credentials.tmdb[:api_key] %>&language=en-US&sort_by=popularity.desc&page=' + pageNum.toString() + '&timezone=America%2FNew_York&include_null_first_air_dates=false',
+    type: 'GET',
+    success: function(response){
+      let shows = response.results;
+      console.log(shows);
+      $.each(shows, (index, show) => {
+        console.log(show.name);
+        $('.additional-shows').append('<div class="card hoverable"><div class="card-image"><%= image_tag("https://image.tmdb.org/t/p//w300_and_h450_bestv2/${show.poster_path}") %></div></div>');
+      });
+    }
+  });
+
+  pageNum += 1;
+}
